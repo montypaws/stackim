@@ -13,8 +13,7 @@ app.use(express.bodyParser())
 
 
 app.get('/', function (req, resp) {
-    resp.setHeader('Content-Type', 'text/plain')
-    resp.end('Hello, world!\n')
+    resp.sendfile(__dirname + '/views/home.html')
 })
 
 app.get('/:tag', function (req, resp) {
