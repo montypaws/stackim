@@ -1,0 +1,9 @@
+{
+  "name": "stackim",
+  "author": "Michael Dippery <michael@monkey-robot.com>",
+  "description": "URL shortener for Stack Overflow profile pages",
+  "private": "true",
+  "dependencies": {
+    "express": "3.1.0"
+  }
+}
