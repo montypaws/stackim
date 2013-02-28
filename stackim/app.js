@@ -81,7 +81,7 @@ app.put('/:tag', function (req, resp) {
                     resp.setHeader('Content-Type', 'text/plain')
                     resp.end("Tag '" + tag + "' is already in use\n")
                 } else {
-                    obj = {'tag': tag, 'stackid': stackid, 'createdAt': new Date()}
+                    var obj = {'tag': tag, 'stackid': stackid, 'createdAt': new Date()}
                     db.collection('tags').insert(obj, function (err) {
                         assert.ok(err == null)
                         console.log('Created tag: ' + JSON.stringify(obj))
