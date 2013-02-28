@@ -11,6 +11,16 @@ var app = express()
 app.enable('trust proxy')
 app.use(express.bodyParser())
 app.use(express.static(__dirname + '/public'))
+app.use(function (req, resp, next) {
+    if ((process.env.NODE_ENV || 'development') === 'development') {
+        next()
+    } else if (req.host === 'stack.im') {
+        next()
+    } else {
+        url = 'http://stack.im' + req.path
+        resp.redirect(301, url)
+    }
+})
 
 
 app.get('/', function (req, resp) {
