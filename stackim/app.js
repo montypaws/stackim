@@ -24,6 +24,7 @@ app.use(function (req, resp, next) {
 
 
 app.get('/', function (req, resp) {
+    resp.set('Cache-Control', 'public, max-age=31557600')
     resp.sendfile(__dirname + '/views/home.html')
 })
 
