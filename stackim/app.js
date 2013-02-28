@@ -40,6 +40,12 @@ app.get('/:tag', function (req, resp) {
                 resp.statusCode = 404
                 resp.end("No tag for '" + tag + "'\n")
             } else {
+                var inc = {'$inc': {'analytics.views': 1}}
+                db.collection('tags').update({'_id': rec._id}, inc, function (err, count) {
+                    if (err != null) {
+                        console.log('Could not increment analytics.views: ' + err)
+                    }
+                })
                 var url = 'http://stackoverflow.com/users/' + rec.stackid
                 resp.redirect(301, url)
             }
