@@ -10,6 +10,7 @@ var app = express()
 
 app.enable('trust proxy')
 app.use(express.bodyParser())
+app.use(express.static(__dirname + '/public'))
 
 
 app.get('/', function (req, resp) {
