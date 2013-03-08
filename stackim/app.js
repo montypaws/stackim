@@ -43,7 +43,7 @@ app.get('/:tag', function (req, resp) {
                 var inc = {'$inc': {'analytics.views': 1}}
                 db.collection('tags').update({'_id': rec._id}, inc, function (err, count) {
                     if (err != null) {
-                        console.log('Could not increment analytics.views: ' + err)
+                        console.error('Could not increment analytics.views: ' + err)
                     }
                 })
                 var url = 'http://stackoverflow.com/users/' + rec.stackid
@@ -59,12 +59,12 @@ app.put('/:tag', function (req, resp) {
         stackid = req.body.stackid
     
     if (typeof stackid === 'undefined') {
-        console.log("PUT request without 'stackid' parameter")
+        console.error("PUT request without 'stackid' parameter")
         resp.statusCode = 400
         resp.setHeader('Content-Type', 'text/plain')
         resp.end("PUT request must contain a 'stackid' parameter\n")
     } else if (tagPattern.test(tag)) {
-        console.log("Rejected shortened URL: '" + tag + "'\n")
+        console.error("Rejected shortened URL: '" + tag + "'\n")
         resp.statusCode = 400
         resp.setHeader('Content-Type', 'text/plain')
         resp.end('Shortened URL may only contain alphanumeric characters\n')
@@ -78,7 +78,7 @@ app.put('/:tag', function (req, resp) {
                 if (err != null) {
                     // Only handling duplicate key errors for now
                     assert.ok(err.code === 11000)
-                    console.log('Duplicate key: ' + tag)
+                    console.error('Duplicate key: ' + tag)
                     resp.statusCode = 409
                     resp.setHeader('Content-Type', 'text/plain')
                     resp.end("Tag '" + tag + "' is already in use\n")
