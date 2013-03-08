@@ -73,21 +73,19 @@ app.put('/:tag', function (req, resp) {
             assert.ok(err == null)
             assert.ok(db != null)
             
-            db.collection('tags').findOne({'tag': tag}, function (err, rec) {
-                assert.ok(err == null)
-                
-                if (rec != null) {
+            var obj = {'tag': tag, 'stackid': stackid, 'createdAt': new Date()}
+            db.collection('tags').insert(obj, function (err) {
+                if (err != null) {
+                    // Only handling duplicate key errors for now
+                    assert.ok(err.code === 11000)
+                    console.log('Duplicate key: ' + tag)
                     resp.statusCode = 409
                     resp.setHeader('Content-Type', 'text/plain')
                     resp.end("Tag '" + tag + "' is already in use\n")
                 } else {
-                    var obj = {'tag': tag, 'stackid': stackid, 'createdAt': new Date()}
-                    db.collection('tags').insert(obj, function (err) {
-                        assert.ok(err == null)
-                        console.log('Created tag: ' + JSON.stringify(obj))
-                        resp.setHeader('Content-Type', 'text/plain')
-                        resp.end('OK\n')
-                    })
+                    console.log('Created tag: ' + JSON.stringify(obj))
+                    resp.setHeader('Content-Type', 'text/plain')
+                    resp.end('OK\n')
                 }
             })
         })
