@@ -34,7 +34,7 @@ app.get('/:tag', function (req, resp) {
         assert.ok(err == null)
         assert.ok(db != null)
         
-        db.collection('tags').findOne({'tag': tag}, function (err, rec) {
+        db.collection('tags').findOne({'_id': tag}, function (err, rec) {
             assert.ok(err == null)
             if (rec == null) {
                 resp.statusCode = 404
@@ -73,7 +73,7 @@ app.put('/:tag', function (req, resp) {
             assert.ok(err == null)
             assert.ok(db != null)
             
-            var obj = {'tag': tag, 'stackid': stackid, 'createdAt': new Date()}
+            var obj = {'_id': tag, 'stackid': stackid, 'createdAt': new Date()}
             db.collection('tags').insert(obj, function (err) {
                 if (err != null) {
                     // Only handling duplicate key errors for now
