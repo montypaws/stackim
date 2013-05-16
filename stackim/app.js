@@ -65,7 +65,7 @@ app.put('/:tag', function (req, resp) {
         resp.end("PUT request must contain a 'stackid' parameter\n")
     } else if (tagPattern.test(tag)) {
         console.error("Rejected shortened URL: '" + tag + "'\n")
-        resp.statusCode = 400
+        resp.statusCode = 403
         resp.setHeader('Content-Type', 'text/plain')
         resp.end('Shortened URL may only contain alphanumeric characters\n')
     } else {
@@ -79,6 +79,9 @@ app.put('/:tag', function (req, resp) {
                     // Only handling duplicate key errors for now
                     assert.ok(err.code === 11000)
                     console.error('Duplicate key: ' + tag)
+                    // 403 may also be appropriate, since we're
+                    // basically forbidding the creation of the
+                    // entity.
                     resp.statusCode = 409
                     resp.setHeader('Content-Type', 'text/plain')
                     resp.end("Tag '" + tag + "' is already in use\n")
