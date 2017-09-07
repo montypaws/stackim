@@ -27,15 +27,3 @@ We're all programmers here, so just use `curl`:
 # Are you Jeff Atwood or Joel Spolsky in disguise?
 
 No, nor is **stack.im** affiliated in any way with Stack Overflow, its founders, or its creators. I just made it for fun (and because I wanted a short URL for my Stack Overflow to put on my résumé, bumper stickers, tattoos, and the inside of my underwear).
-
-# Why did you use node.js + MongoDB?
-
-Mostly just to learn them. I initially built **stack.im** with Django, but I already know Django pretty well and I wanted to learn something new and exciting.
-
-# Your node.js code sucks.
-
-Yeah. I'm not much of a JavaScript programmer and I'm still learning, so it probably does.
-
-# So does your CSS.
-
-Well, now you're just being mean.
