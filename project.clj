@@ -4,7 +4,8 @@
   :description "URL shortener for Stack Overflow profiles"
   :url "http://stack.im/"
   :dependencies [[compojure "1.6.0"]
-                 [http-kit "2.2.0"]]
+                 [http-kit "2.2.0"]
+                 [selmer "1.11.0"]]
   :main ^:skip-aot stackim.core
   :target-path "target/%s"
   :jar-name "stackim.jar"
