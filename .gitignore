@@ -1,1 +1,3 @@
-node_modules/
+/.lein-repl-history
+/stackim.db
+/target
